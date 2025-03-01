@@ -1,0 +1,152 @@
+/* Reset & Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f7f9fc;
+    color: #333;
+  }
+  
+  /* Header & Navigation */
+  header {
+    background-color: #00796b;
+    color: #fff;
+    padding: 15px 20px;
+  }
+  
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  nav .logo {
+    font-size: 1.5em;
+    font-weight: 700;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+  }
+  
+  nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  
+  nav ul li a:hover {
+    color: #b2dfdb;
+  }
+  
+  /* Main Content */
+  main {
+    padding: 20px;
+    margin-bottom: 60px; /* Space for footer */
+  }
+  
+  .container {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Heading */
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #00796b;
+  }
+  
+  /* Flash Messages */
+  .flash-container {
+    margin-bottom: 20px;
+  }
+  
+  .flash-message {
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+  }
+  
+  .flash-message.success {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  .flash-message.danger {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  
+  .flash-message.warning {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+  
+  /* Form Styles */
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+  }
+  
+  /* Divider */
+  hr {
+    margin: 20px 0;
+    border: 0;
+    border-top: 1px solid #eee;
+  }
+  
+  /* Update Button */
+  .btn-update {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #00796b;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .btn-update:hover {
+    background-color: #005f56;
+  }
+  
+  /* Footer */
+  footer {
+    background-color: #00796b;
+    color: #fff;
+    text-align: center;
+    padding: 15px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  

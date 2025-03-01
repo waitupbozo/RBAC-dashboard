@@ -1,0 +1,100 @@
+/* Reset & Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f7f9fc;
+    color: #333;
+  }
+  
+  /* Header & Navigation */
+  header {
+    background-color: #00796b;
+    color: #fff;
+    padding: 15px 20px;
+  }
+  
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  nav .logo {
+    font-size: 1.5em;
+    font-weight: 700;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+  }
+  
+  nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  
+  nav ul li a:hover {
+    color: #b2dfdb;
+  }
+  
+  /* Main Content */
+  main {
+    padding: 20px;
+    margin-bottom: 60px; /* space for footer */
+  }
+  
+  .container {
+    max-width: 1000px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Heading Styles */
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #00796b;
+  }
+  
+  /* Card Styles */
+  .card {
+    background-color: #f1f1f1;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
+  
+  .card h3 {
+    margin-bottom: 10px;
+    color: #00796b;
+  }
+  
+  .card p {
+    font-size: 0.95em;
+    line-height: 1.6;
+  }
+  
+  /* Footer */
+  footer {
+    background-color: #00796b;
+    color: #fff;
+    text-align: center;
+    padding: 15px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  
