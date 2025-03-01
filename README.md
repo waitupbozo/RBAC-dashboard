@@ -105,5 +105,3 @@ Solution: Used parameterized queries with MySQL and performed input validation b
 ## Contributing
 Contributions are welcome! If you'd like to contribute, please fork the repository, make your changes, and open a pull request. Make sure to follow the coding guidelines and write tests for any new features.
 
-## License
-This project is licensed under the MIT License. See the LICENSE file for details.
