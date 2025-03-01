@@ -86,15 +86,7 @@ flask run
 Open your browser and navigate to http://127.0.0.1:5000.
 
 ## Screenshots:
-Below are some screenshots showing the system in action:
-
-Registration Page
-
-Login Page
-
-User Dashboard
-
-Admin Panel
+Screenshots are included in the screenshots folder.
 
 ## Challenges Faced & Solutions Implemented
 1. Handling Duplicate Registrations
