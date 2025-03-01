@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Update Account Details</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='account.css') }}">
+  <!-- Google Fonts for modern typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Header & Navigation -->
+  <header>
+    <nav>
+      <div class="logo">My Account</div>
+      <ul>
+        <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <!-- Main Content -->
+  <main>
+    <div class="container">
+      <h2>Update Account Details</h2>
+      
+      <!-- Flash Messages -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="flash-container">
+            {% for category, message in messages %}
+              <div class="flash-message {{ category }}">{{ message }}</div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+      
+      <!-- Account Update Form -->
+      <form action="{{ url_for('account') }}" method="POST" novalidate>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" name="username" id="username" value="{{ user.username }}" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" value="{{ user.email }}" required>
+        </div>
+        <hr>
+        <p>If you wish to change your password, please enter your current password and then your new password.</p>
+        <div class="form-group">
+          <label for="current_password">Current Password</label>
+          <input type="password" name="current_password" id="current_password">
+        </div>
+        <div class="form-group">
+          <label for="new_password">New Password</label>
+          <input type="password" name="new_password" id="new_password">
+        </div>
+        <div class="form-group">
+          <label for="confirm_password">Confirm New Password</label>
+          <input type="password" name="confirm_password" id="confirm_password">
+        </div>
+        <button type="submit" class="btn-update" id="update_button" >Update Account</button>
+      </form>
+    </div>
+  </main>
+  
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 User Dashboard. All rights reserved.</p>
+  </footer>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const username = document.getElementById('username');
+        const email = document.getElementById('email');
+        const currentPassword = document.getElementById('current_password');
+        const newPassword = document.getElementById('new_password');
+        const confirmPassword = document.getElementById('confirm_password');
+        const updateButton = document.getElementById('update_button');
+
+        const initialUsername = username.value;
+        const initialEmail = email.value;
+
+        function checkInputs() {
+            if (username.value.trim() !== initialUsername || email.value.trim() !== initialEmail ||
+                currentPassword.value.trim() !== '' || newPassword.value.trim() !== '' ||
+                confirmPassword.value.trim() !== '') {
+                updateButton.disabled = false;
+            } else {
+                updateButton.disabled = true;
+            }
+        }
+
+        username.addEventListener('input', checkInputs);
+        email.addEventListener('input', checkInputs);
+        currentPassword.addEventListener('input', checkInputs);
+        newPassword.addEventListener('input', checkInputs);
+        confirmPassword.addEventListener('input', checkInputs);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Registration & Login</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <div class="container">
+    <!-- Registration Form (Displayed by default) -->
+    <div id="registration-form" class="form-container">
+      <h2>Register</h2>
+      <form id="registerForm" action="/register" method="POST" novalidate>
+        <div class="input-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" placeholder="Enter your username" required>
+        </div>
+        <div class="input-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required>
+        </div>
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" required>
+          <span class="toggle-password" onclick="togglePassword('password')"></span>
+        </div>
+        <div class="password-strength">
+          <div id="strength-bar"></div>
+        </div>
+        <div class="input-group">
+          <label for="role">User Role</label>
+          <select id="role" name="role" required>
+            <option value="">Select Role</option>
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+        <button type="submit" class="btn">Register</button>
+      </form>
+      <p class="toggle-form-text">
+        Already have an account? <a href="#" onclick="toggleForms()">Login here</a>
+      </p>
+    </div>
+    
+
+    <!-- Login Form (Hidden by default) -->
+    <div id="login-form" class="form-container" style="display: none;">
+      <h2>Login</h2>
+      <form id="loginForm" action="/login" method="POST" novalidate>
+        <div class="input-group">
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" name="login-email" placeholder="you@example.com" required>
+        </div>
+        <div class="input-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" name="login-password" placeholder="Enter your password" required>
+          <span class="toggle-password" onclick="togglePassword('login-password')"></span>
+        </div>
+        <button type="submit" class="btn">Login</button>
+         <div class="g-recaptcha" data-sitekey="{{ config['RECAPTCHA_SITE_KEY'] }}"></div>
+         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+      </form>
+      <p class="toggle-form-text">
+        Don't have an account? <a href="#" onclick="toggleForms()">Register here</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- JavaScript for form toggle, validation, and password strength -->
+  <script>
+    // Toggle between registration and login forms
+    function toggleForms() {
+      var regForm = document.getElementById('registration-form');
+      var loginForm = document.getElementById('login-form');
+      if (regForm.style.display === "none") {
+        regForm.style.display = "block";
+        loginForm.style.display = "none";
+      } else {
+        regForm.style.display = "none";
+        loginForm.style.display = "block";
+      }
+    }
+
+    // Toggle password visibility
+    function togglePassword(id) {
+      var input = document.getElementById(id);
+      input.type = input.type === "password" ? "text" : "password";
+    }
+
+    // Password strength meter for registration form
+    document.getElementById('password').addEventListener('input', function() {
+      var password = this.value;
+      var strengthBar = document.getElementById('strength-bar');
+      var strength = 0;
+      
+      // Increase strength for each criteria met
+      if (password.length >= 6) { strength++; }
+      if (/[a-z]/.test(password) && /[A-Z]/.test(password)) { strength++; }
+      if (/\d/.test(password)) { strength++; }
+      if (/[@$!%*?&#]/.test(password)) { strength++; }
+
+      var width = (strength / 4) * 100;
+      strengthBar.style.width = width + "%";
+      
+      // Set strength bar colour based on strength level
+      if (width < 25) {
+        strengthBar.style.backgroundColor = "#ff4d4d"; // red
+      } else if (width < 50) {
+        strengthBar.style.backgroundColor = "#ffa500"; // orange
+      } else if (width < 75) {
+        strengthBar.style.backgroundColor = "#ffff66"; // yellow
+      } else {
+        strengthBar.style.backgroundColor = "#66ff66"; // light green
+      }
+    });
+
+    // Basic validation for the registration form
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+      var username = document.getElementById('username').value.trim();
+      var email = document.getElementById('email').value.trim();
+      var password = document.getElementById('password').value;
+      var role = document.getElementById('role').value;
+      
+      // Validate required fields
+      if (!username || !email || !password || !role) {
+        e.preventDefault();
+        alert("Please fill all required fields.");
+        return;
+      }
+      
+      // Validate email format
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        e.preventDefault();
+        alert("Please enter a valid email address.");
+        return;
+      }
+      
+      // Validate password length
+      if (password.length < 6) {
+        e.preventDefault();
+        alert("Password must be at least 6 characters long.");
+        return;
+      }
+      
+      // If all validations pass, no e.preventDefault() is called,
+      // so the form will submit normally to the backend.
+    });
+
+    // Basic validation for the login form (remains unchanged)
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      var email = document.getElementById('login-email').value.trim();
+      var password = document.getElementById('login-password').value;
+      
+      // Validate required fields
+      if (!email || !password) {
+        e.preventDefault();
+        alert("Please fill all required fields.");
+        return;
+      }
+      
+      // Validate email format
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        e.preventDefault();
+        alert("Please enter a valid email address.");
+        return;
+      }
+      
+      // If validations pass, allow the form to submit normally.
+      // Remove any alert like "Login successful!" here, because the server should handle redirection.
+    });
+
+    // This block toggles to the login form if the URL contains ?show=login
+    window.onload = function() {
+      // Check the query parameter using JavaScript
+      var urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('show') === 'login') {
+        toggleForms();
+      }
+
+    };
+  </script>
+
+  <!-- Flash messages -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <script>
+          alert("{{ message }}");
+        </script>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+</body>
+</html>

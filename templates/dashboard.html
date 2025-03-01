@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>User Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+  <!-- Google Fonts for a modern look -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Header & Navigation -->
+  <header>
+    <nav>
+      <div class="logo">User Dashboard</div>
+      <ul>
+        <li><a href="{{ url_for('account') }}">Update Account</a></li>
+        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <div class="container">
+      <h2>Welcome, {{ username }}</h2>
+      
+      <!-- Dashboard Cards -->
+      <div class="card">
+        <h3>Account Overview</h3>
+        <p>View and update your account details, such as your profile and contact information.</p>
+      </div>
+      <div class="card">
+        <h3>Recent Activity</h3>
+        <p>Check your recent activity here, such as recent logins, updates, or notifications.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 User Dashboard. All rights reserved.</p>
+  </footer>
+</body>
+</html>
