@@ -86,7 +86,7 @@ flask run
 Open your browser and navigate to http://127.0.0.1:5000.
 
 ## Screenshots:
-Screenshots are included in the screenshots folder.
+Screenshots are included in the executed_images folder.
 
 ## Challenges Faced & Solutions Implemented
 1. Handling Duplicate Registrations
